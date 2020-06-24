@@ -5,10 +5,10 @@
 This paper provides specification needed to develop the Lustre driver for Cinder.
 The development will be done in three steps:
 
-1. The proper driver will be developed with basic Lustre functionnality
-2. Lustre support will be added to the backup functionnality of Cinder
-3. The unit and Tempest tests will be added to validate the good working of the driver
-4. Advanced Lustre functionnality will be progressively added to the Cinder driver
+1. The proper driver will be developed with basic Lustre functionality.
+2. Lustre support will be added to the backup functionality of Cinder.
+3. The unit and Tempest tests will be added to validate the good working of the driver.
+4. Advanced Lustre functionality will be progressively added to the Cinder driver.
 
 To develop this module, a development infrastructure will be installed on the developer computer but should not be used to launch validations tests (Tempest).
 Indeed, theses tests could take hours on a basic computer and need a complete installation on OpenStack whereas using directly the OpenStack CI guarantees a good behavior without the complex installation.
@@ -34,9 +34,9 @@ The class will be named `LustreDriver`.
 
 #### `volumedriver` interface
 
-The class `LustreDriver` will be annoted with `@interface.volumedriver`.
+The class `LustreDriver` will be annotated with `@interface.volumedriver`.
 This interface is the core backend volume driver interface.
-As mentionned in the docstring: *All backend drivers should support this interface as a bare minimum*.
+As mentioned in the docstring: *All backend drivers should support this interface as a bare minimum*.
 
 
 #### `RemoteFSSnapDriverDistributed` inheritance
@@ -52,7 +52,7 @@ Contrary to the last gerrit patch trying to implement the Cinder Lustre Driver, 
 
 - This class has been deprecated and now deleted
 - The `BaseVD` now directly implements the `extend_volume` method
-- The `RemoteFsDriver` class arleady inherit from `BaseVD` and thus our `LustreDriver` class inherit from `BaseVD`
+- The `RemoteFsDriver` class already inherit from `BaseVD` and thus our `LustreDriver` class inherit from `BaseVD`
 
 
 ### Method implementations
@@ -80,19 +80,19 @@ Here the required methods to implement:
 #### `do_setup`
 
 Any initialization the volume driver does while starting.
-In this method, the driver create the `remotefs` client by calling `RemoteFsClient` constructor.
+In this method, the driver creates the `remotefs` client by calling `RemoteFsClient` constructor.
 Then, the Lustre fs is mounted and all mounts points are refreshed.
 
 #### `create_volume`
 
 Create a volume on given `lustre_share`.
 First we retrieve properties of the volume (size and path) and check if it already exists.
-If the volume type is `thin`, we create a `qcow2` file else directly a raw file using fallocate.
+If the volume type is `thin`, we create a `qcow2` file else directly a raw file using `fallocate`.
 
 #### `delete_volume`
 
 Delete a logical volume.
-After processing the usual tests (share mounted), we simply execute `rm -rf` of the volume to delete.
+After processing the usual tests (share mounted), we simply execute `rm -rf` on the volume to delete.
 
 #### `ensure_export`
 
@@ -109,7 +109,6 @@ We'll not implement this method.
 Removes an export for a logical volume.
 We'll not implement this method.
 
-
 #### `validate_connector`
 
 We'll not implement this method.
@@ -119,7 +118,7 @@ We'll not implement this method.
 Allow connection to connector and return connection info.
 This method will need several steps:
 
-- First find the active `qcow2` file from volume information.
+- First find the active `qcow2` file from volume informations.
 - Then we test the file to find if it's a `qcow2' or a `raw` file.
 - Finally, we send back the connection informations.
 
@@ -160,7 +159,7 @@ This class implements `BackupDriver` which is a *Common backup base class*, it's
 ### Method implementations
 
 Provides backup, restore and delete using Lustre repository.
-We don't need to override method from `PosixBackupDriver` but we need to give its the `backup_path`.
+We don't need to override method from `PosixBackupDriver` but we need to pass the `backup_path` to the constructor.
 
 To get the backup path, we'll use this process:
 
@@ -174,14 +173,14 @@ To get the backup path, we'll use this process:
 
 ### Location
 
-The Lustre tests will be developed in the Python module `cinder/tests/unit/volume/drivers/test_lustre.py` in order to respect the Cinder conventions.
-The class will be named `LustreDriverTestCase`.
+The Lustre tests will be developed in the Python module `cinder/tests/unit/volume/drivers/test_lustre.py` in order to respect Cinder conventions.
+This class will be named `LustreDriverTestCase`.
 
 
 ### Tests
 
-The goal is to provide a maximum of tests.
-Here example of tests we will implement:
+The goal is to provide a large test coverage.
+Here are examples of test we will implement:
 
 - Test local path common use case
 - Test mount common use case
