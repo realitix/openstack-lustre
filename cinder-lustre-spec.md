@@ -77,43 +77,90 @@ Here the required methods to implement:
 **Let's analyze the needed work for each method.**
 
 
-#### `do_setup`
+#### do_setup
+
+```
+def do_setup(self, context) -> None
+    - context: Context (cinder environment)
+
+```
 
 Any initialization the volume driver does while starting.
 In this method, the driver creates the `remotefs` client by calling `RemoteFsClient` constructor.
 Then, the Lustre fs is mounted and all mounts points are refreshed.
 
-#### `create_volume`
+#### create_volume
+
+```
+def create_volume(self, volume) -> {'provider_location':}
+    - volume: Volume to create
+    return the Provider location
+```
 
 Create a volume on given `lustre_share`.
 First we retrieve properties of the volume (size and path) and check if it already exists.
 If the volume type is `thin`, we create a `qcow2` file else directly a raw file using `fallocate`.
 
-#### `delete_volume`
+#### delete_volume
+
+```
+def delete_volume(self, volume) -> None
+    - volume: Volume to delete
+```
 
 Delete a logical volume.
 After processing the usual tests (share mounted), we simply execute `rm -rf` on the volume to delete.
 
-#### `ensure_export`
+#### ensure_export
+
+```
+def ensure_export(self, context, volume) -> None
+    - context: Context (cinder environment)
+    - volume: Volume to export
+```
 
 Synchronously recreates an export for a logical volume.
 We ensure that all Lustre shares are mounted.
 
-#### `create_export`
+#### create_export
+
+```
+def create_export(self, context, volume, connector) -> None
+    - context: Context (cinder environment)
+    - volume: Volume to export
+    - connector: Connector to Lustre
+```
 
 Exports the volume.
 We'll not implement this method.
 
-#### `remove_export`
+#### remove_export
+
+```
+def remove_export(self, context, volume) -> None
+    - context: Context (cinder environment)
+    - volume: Volume to export
+```
 
 Removes an export for a logical volume.
 We'll not implement this method.
 
-#### `validate_connector`
+#### validate_connector
+
+```
+def validate_connector(self, connector) -> None
+    - connector: Connector to Lustre
+```
 
 We'll not implement this method.
 
-#### `initialize_connection`
+#### initialize_connection
+
+```
+def initialize_connection(self, volume, connector) -> {'driver_volume_type','data','mount_point_base'}
+    - volume: Volume to connect
+    - connector: Connector to Lustre
+```
 
 Allow connection to connector and return connection info.
 This method will need several steps:
@@ -122,12 +169,24 @@ This method will need several steps:
 - Then we test the file to find if it's a `qcow2' or a `raw` file.
 - Finally, we send back the connection informations.
 
-#### `terminate_connection`
+#### terminate_connection
+
+```
+def terminate_connection(self, volume, connector) -> None
+    - volume: Volume to connect
+    - connector: Connector to Lustre
+```
 
 Disallow connection from connector.
 We'll not implement this method.
 
 #### `extend_volume`
+
+```
+def extend_volume(selv, volume, size_gb) -> None
+    - volume: Volume to update
+    - size_gb: New size in GB
+```
 
 We use `qemu-img` to resize the volume.
 `qemu-img` can resize both raw and qcow2 files.
