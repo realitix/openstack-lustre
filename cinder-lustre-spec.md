@@ -265,31 +265,157 @@ def test_mount_lustre(self)
 ```
 
 - Test mount lustre should reraise exception if mount fails
+
+```
+def test_mount_lustre_should_reraise_exception_on_failure(self)
+```
+
 - Test get mount point
+
+```
+def test_get_mount_point_for_share(self)
+```
+
 - Test calculation of capacity
+
+```
+def test_get_available_capacity_with_df(delf)
+```
+
 - Test size of provisionned size
+
+```
+def test_get_provisioned_capacity(self)
+```
+
 - Test update volume stats with qcow2 files
+
+```
+def test_update_volume_stats_thin(self)
+```
+
 - Test update volume stats with raw files
+
+```
+def test_update_volume_stats_thick(self)
+```
+
 - Test ensure share mounted
+
+```
+def test_ensure_share_mounted(self)
+```
+
 - Test ensure shares mounted should save share if mounted with success
+
+```
+def test_ensure_shares_mounted_should_save_mounting_successfully(self)
+```
+
 - Test ensure shares mounted should not save share if failed to mount
+
+```
+def test_ensure_shares_mounted_should_not_save_mounting_with_error(self)
+```
+
 - Test find share
+
+```
+def test_find_share(self)
+```
+
 - Test find share should throw error if no more space available
+
+```
+def test_find_share_should_throw_error_if_there_is_no_enough_place(self)
+```
+
 - Test create thin volume
+
+```
+def test_create_thin_volume(self)
+```
+
 - Test create thick fallocate volume
+
+```
+def test_create_thick_fallocate_volume(self)
+```
+
 - Test create thick dd volume
+
+```
+def test_create_thick_dd_volume(self)
+```
+
 - Test create volume should ensure lustre is mounted
+
+```
+def test_create_volume_should_ensure_lustre_mounted(self)
+```
+
 - Test delete volume
+
+```
+def test_delete_volume(self, mock_delete_if_exists)
+```
+
 - Test refresh mounts
+
+```
+def test_refresh_mounts(self)
+```
+
 - Test refresh mounts with exception
+
+```
+def test_refresh_mounts_with_excp(self)
+```
+
 - Test mount shares
+
+```
+def test_do_mount(self)
+```
+
 - Test unmount shares
+
+```
+def test_do_umount(self)
+```
+
 - Test read info file
+
+```
+def test_read_info_file(self)
+```
+
 - Test extend volume
+
+```
+def test_extend_volume(self)
+```
+
 - Test extend volume with snapshot
+
+```
+def test_extend_volume_with_snapshot(self)
+```
+
 - Test create snapshot
+
+```
+def test_create_snapshot_online(self)
+```
+
 - Test delete snapshot
+
+```
+def test_delete_snapshot_online(self)
+```
+
 - Test copy volume from snapshot
+
 - Test create volume from snapshot
 - Test initialize connection
 - Test backup volume
