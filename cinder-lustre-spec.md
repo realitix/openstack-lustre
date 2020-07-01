@@ -10,6 +10,16 @@ The development will be done in three steps:
 3. The unit and Tempest tests will be added to validate the good working of the driver.
 4. Advanced Lustre functionality will be progressively added to the Cinder driver.
 
+### Specification source
+
+Theses specification are inspired from this patch: https://review.opendev.org/#/c/395572/
+
+The first implementation is rebased on master Cinder code in order to comply with last Cinder version.
+Indeed, you will find some differences between the patch and this specification document depending on the Cinder API update.
+
+
+### Methodology
+ 
 To develop this module, a development infrastructure will be installed on the developer computer but should not be used to launch validations tests (Tempest).
 Indeed, theses tests could take hours on a basic computer and need a complete installation on OpenStack whereas using directly the OpenStack CI guarantees a good behavior without the complex installation.
 In order to launch the tests, the developer should submit or update a gerrit patch and the OpenStack CI will do the job. Moreover, this will allow the developer to continue the work without overloading its computer.
@@ -21,6 +31,7 @@ This process will be used for this development.
 >     - Snapshot support
 >     - Cloning support
 >     - JOB Stats integration for performance monitoring and QoS
+
 
 ## 1 - The Lustre Driver
 
@@ -242,7 +253,17 @@ The goal is to provide a large test coverage.
 Here are examples of test we will implement:
 
 - Test local path common use case
+
+```
+def test_local_patch(self)
+```
+
 - Test mount common use case
+
+```
+def test_mount_lustre(self)
+```
+
 - Test mount lustre should reraise exception if mount fails
 - Test get mount point
 - Test calculation of capacity
