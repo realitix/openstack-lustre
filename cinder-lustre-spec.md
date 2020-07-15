@@ -8,7 +8,8 @@ The development will be done in three steps:
 1. The proper driver will be developed with basic Lustre functionality.
 2. Lustre support will be added to the backup functionality of Cinder.
 3. The unit and Tempest tests will be added to validate the good working of the driver.
-4. Advanced Lustre functionality will be progressively added to the Cinder driver.
+4. Performance tests will be added at several levels.
+5. Advanced Lustre functionality will be progressively added to the Cinder driver.
 
 ### Specification source
 
@@ -416,10 +417,55 @@ def test_delete_snapshot_online(self)
 
 - Test copy volume from snapshot
 
+```
+def test_copy_volume_from_snapshot(self)
+```
+
 - Test create volume from snapshot
+
+```
+def test_create_volume_from_snapshot(self)
+```
+
 - Test initialize connection
+
+```
+def test_initialize_connection(self)
+```
+
 - Test backup volume
+
+```
+def test_backup_volume(self)
+```
+
 - Test copy volume to raw image
+
+```
+def test_copy_volume_to_image_raw_image(self)
+```
+
 - Test copy volume to qcow2 image
+
+```
+def test_copy_volume_to_image_qcow2_image(self)
+```
+
 - Test migrate volume
+
+```
+def test_migrate_volume_is_there(self)
+```
+
+
+## 4 - Performance tests
+
+### Location
+
+The performance tests will be developed in the Python module `cinder/tests/unit/volume/drivers/test_lustre_performance.py` in order to respect Cinder conventions.
+This class will be named `LustreDriverPerformanceTestCase`.
+
+
+### Tests
+
 
